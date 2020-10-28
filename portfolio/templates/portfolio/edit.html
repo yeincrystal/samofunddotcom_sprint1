@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{%static 'portfolio/style.css' %}" type="text/css" />
+{% endblock %}
+
+{% block content %}
+        <box>
+        <h1>Edit Post</h1>
+        </box>
+        <form action="{% url 'portfolio:update' port.id %}" method="POST">
+            {% csrf_token %}
+            <h2>자산운용사</h2>
+            <input class="form-control"  type = "text" name="author" value="{{port.author}}"/>
+            <h2>펀드명</h2>
+            <textarea class="form-control" cols="20" rows="2" name="body"> {{port.body}} </textarea>
+            <br>
+            <input class="btn btn-primary" type = "submit" value="수정하기" />
+        </form>
+        <a class="btn btn-primary" href="{% url 'portfolio:index' %}">목록</a>
+        
+{% endblock %}

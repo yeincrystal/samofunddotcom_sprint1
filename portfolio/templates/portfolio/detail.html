@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{%static 'portfolio/style.css' %}" type="text/css" />
+{% endblock %}
+
+{% block content %}
+        <box>
+        <h1>These are stocks of the week</h1>
+        </box>
+        {% if portfolio %}
+        <h2>자산운용사</h2>
+        <p>{{portfolio.author}}</p>
+
+        <h2>Name of the Fund</h2>
+        <p>{{portfolio.body}}</p>
+
+        <h2>Updated Date</h2>
+        <p>{{portfolio.created_at}}</p>
+        {% else %}
+            <p>No FUNDS</p>
+        {% endif %}
+
+        <a class="btn btn-primary" href="{% url 'portfolio:index' %}">목록</a>
+        <a class="btn btn-primary" href="{% url 'portfolio:edit' portfolio.id %}"> 수정하기 </a>
+        <a class="btn btn-primary" href="{% url 'portfolio:delete' portfolio.id %}">삭제하기 </a>
+{% endblock %}

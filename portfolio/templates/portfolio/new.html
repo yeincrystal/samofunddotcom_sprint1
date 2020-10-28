@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block style %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{%static 'portfolio/style.css' %}" type="text/css" />
+{% endblock %}
+
+{% block content %}
+  <box>
+    <h1>New Post</h1>
+  </box>  
+    <form action="{% url 'portfolio:create' %}" method="POST">
+      {% csrf_token %}
+      <h2>자산운용사</h2>
+      <input class="form-control" type="text" name="author" />
+      <h2>펀드명</h2>
+      <textarea class="form-control" cols="20" rows="2" name="body"></textarea>
+      <br />
+      <input class="btn btn-primary" type="submit" value="작성하기">
+    </form>
+    <a class="btn btn-primary" href="{% url 'portfolio:index' %}">목록</a>
+{% endblock %}

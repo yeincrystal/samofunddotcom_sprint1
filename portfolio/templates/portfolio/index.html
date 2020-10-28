@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{%static 'portfolio/style.css' %}" type="text/css" />
+{% endblock %}
+
+{% block content %}
+    <box>
+        <img id="icon" src="{% static 'portfolio/images/icon.jpeg' %}"></img>
+    </box>
+        {% if portfolio %}
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>자산운용사</th>
+                    <th>펀드명</th>
+                    <th>게시일</th>
+                    <th>상세</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for port in portfolio %}
+                <tr>
+                    <th>{{port.id}}</th>
+                    <td>{{port.author}}</td>
+                    <td>{{port.body}}</td>
+                    <td>{{port.created_at}}</td>
+                    <td><a href = "{% url 'portfolio:detail' port.id %}">보기</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>NO FUNDS FOUND</p>
+        {% endif %}
+
+        <a class="btn btn-primary" href="{% url 'portfolio:new' %}">글쓰기</a>
+{% endblock %}

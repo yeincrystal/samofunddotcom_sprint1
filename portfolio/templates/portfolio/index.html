@@ -9,6 +9,19 @@
     <box>
         <img id="icon" src="{% static 'portfolio/images/icon.jpeg' %}"></img>
     </box>
+
+    <form action="{% url 'portfolio:search' %}"  method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="fund" placeholder="What are you looking for?" type="text">
+        </div>
+        <button id="submit" class="btn btn-primary" type="submit">Search</button>
+    </form><br><br>
+
+    {% if fund %}
+        <h4>{{ fund.author }} | {{ fund.body }} </h4>
+    {% endif %}
+
         {% if portfolio %}
         <table class="table table-hover">
             <thead>

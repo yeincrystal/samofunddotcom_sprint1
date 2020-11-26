@@ -10,5 +10,8 @@ urlpatterns = [
     path('search/', views.search, name="search"),
     path('<int:port_id>/edit', views.edit, name='edit'),
     path('<int:port_id>/update', views.update, name='update'),
-    path('<int:port_id>/delete', views.delete, name="delete"),
+    path('<int:port_id>/delete', views.delete, name="delete"), #이렇게 해야 url 형식 아니고 클릭으로 들어가는거
+    path('<int:port_id>/like', views.like, name='like'),
 ]
+
+

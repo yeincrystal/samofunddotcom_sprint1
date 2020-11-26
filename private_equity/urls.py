@@ -15,9 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+#아래 두 줄은 Development 단계에서만 쓰이는 코드임.
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('portfolio/', include('portfolio.urls')),
-]
+    path('accounts/', include('accounts.urls')),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) #이 줄 이해 안가 ㅠ
+

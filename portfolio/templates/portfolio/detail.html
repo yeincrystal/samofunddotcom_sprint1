@@ -9,9 +9,16 @@
         <box>
         <h1>These are stocks of the week</h1>
         </box>
+
+        {% if portfolio.image %}
+        <div>
+            <img src="{{ portfolio.image.url }}" alt="Portfolio Image"/>
+        </div>
+        {% endif %}
+        
         {% if portfolio %}
         <h2>자산운용사</h2>
-        <p>{{portfolio.author}}</p>
+        <p>{{portfolio.user.get_username}}</p>
 
         <h2>Name of the Fund</h2>
         <p>{{portfolio.body}}</p>
@@ -21,8 +28,25 @@
         {% else %}
             <p>No FUNDS</p>
         {% endif %}
+<!--복습-->
+        <div>좋아요 수: {{ portfolio.liked_users.count }}</div>
+            {% if portfolio.user.is_authenticated %}
+            <form action="{% url 'portfolio:like' portfolio.id %}" method="POST">
+                {% csrf_token %}
+
+                {% if user in portfolio.liked_users.all %}
+                <button type="submit" class="btn btn-primary">LIKE</button>
+                {% else %}
+                <button type="submit" class="btn btn-secondary">LIKE</button>
+                {% endif %}
+            </form>
+            {% endif %}
+<!---->
 
         <a class="btn btn-primary" href="{% url 'portfolio:index' %}">목록</a>
+        {% if user == portfolio.user %}
         <a class="btn btn-primary" href="{% url 'portfolio:edit' portfolio.id %}"> 수정하기 </a>
         <a class="btn btn-primary" href="{% url 'portfolio:delete' portfolio.id %}">삭제하기 </a>
+        {% endif %} 
+
 {% endblock %}

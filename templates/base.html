@@ -12,6 +12,34 @@
     {% endblock %}
   </head>
 <body>
+  <!-- Log in 여부에 따른 헤더 -->
+  <!--context로 전달 안했는데도 user만 허용해줌!! 원래는 context에 담아서 넘겨줘야 하는데..-->
+  <!--로그인 되어있으면 user.is_authenticated의 값이 True-->
+  <!--Django에서는 함수 불러올 때 괄호 안치니까 그냥 is_authenticated-->
+  {% if user.is_authenticated %}
+    <div class="container">
+    <!--로그아웃은 POST만 허용할거라서 link이용하면 안되고, form태그로 감싸야함 함-->
+    <form action="{% url 'accounts:logout' %}" method="POST">
+              {% csrf_token %}
+              <!--원래처럼 User.username(변수이름)해도 나오긴 하지만, username을 template에서 사용하려면 .get_username이라는 내장함수(변수 아님!) 사용할 것!  -->
+              {{ user.get_username }}님 환영합니다.
+    <button type="submit" class="btn btn-primary">LOGOUT</button>
+    </form>
+    </div>
+  {% else %}
+  <!--Button을 a 태그로 감싸기 -> a 태그는 get방식!! -->
+    <div class="container">
+    <a href="{% url 'accounts:login' %}">
+      <button type="submit" class="btn btn-primary">LOGIN</button>
+    </a>
+    <a href="{% url 'accounts:sign-up' %}">
+      <button type="submit" class="btn btn-primary">SIGN UP</button>
+    </a>
+    </div>
+  {% endif %}
+
+
+
     {% block content %}
     {% endblock %}
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

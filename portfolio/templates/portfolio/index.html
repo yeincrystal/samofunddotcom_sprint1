@@ -37,7 +37,7 @@
                 {% for port in portfolio %}
                 <tr>
                     <th>{{port.id}}</th>
-                    <td>{{port.author}}</td>
+                    <td>{{port.user.get_username}}</td>
                     <td>{{port.body}}</td>
                     <td>{{port.created_at}}</td>
                     <td><a href = "{% url 'portfolio:detail' port.id %}">보기</a></td>
@@ -49,5 +49,5 @@
         <p>NO FUNDS FOUND</p>
         {% endif %}
 
-        <a class="btn btn-primary" href="{% url 'portfolio:new' %}">글쓰기</a>
+        <a class="btn btn-primary btn-ii" href="{% url 'portfolio:new' %}">글쓰기</a>
 {% endblock %}

@@ -11,14 +11,20 @@
   <box>
     <h1>New Post</h1>
   </box>  
-    <form action="{% url 'portfolio:create' %}" method="POST">
+    <form action="{% url 'portfolio:create' %}" method="POST" enctype="multipart/form-data">
       {% csrf_token %}
-      <h2>자산운용사</h2>
-      <input class="form-control" type="text" name="author" />
+      
       <h2>펀드명</h2>
       <textarea class="form-control" cols="20" rows="2" name="body"></textarea>
       <br />
+      <div class="form-group">
+        <label for="image">이미지</label>
+        <input type="file" class="form-control-file" id="image" name="image"/>
+      </div>
       <input class="btn btn-primary" type="submit" value="작성하기">
     </form>
     <a class="btn btn-primary" href="{% url 'portfolio:index' %}">목록</a>
 {% endblock %}
+
+<!--Label은 for, input은 id + name 필요! -->
+<!--enctype: encoding type-->

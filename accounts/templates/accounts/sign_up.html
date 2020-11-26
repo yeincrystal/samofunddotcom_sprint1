@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <!--에러가 있을 때만 실행되는 부분-->
+    {% if error %}
+    <div class="alert alert-danger" role='alert'>
+        {{error}}
+    </div>
+    {% endif %}
+
+    <form method="POST" action="{% url 'accounts:sign-up' %}">
+        <!--폼 태그 쓸 때는 보안 위험이 있기 때문에 아랫줄 꼭 쓰기!!-->
+        {% csrf_token %}
+        <h1>Sign Up</h1>
+        <!--각각의 label이 다른 아이디를 갖도록 해서 구별하기-->
+        <div class="form-group">
+            <!--라벨이랑 인풋이 이어지도록-->
+            <label for="username"> 아이디 </label>
+            <input type="text" id="username" name="username" placeholder="아이디">
+        </div>
+        
+        <div class="form-group">
+            <label for="password">비밀번호</label>
+            <input type="password" id="password" name="password" placeholder="비밀번호">
+        </div>
+
+        <div class="form-group">
+            <label for="password_check">비밀번호</label>
+            <input type="password" id="password_check" name="password_check" placeholer="비밀번호 확인">
+        </div>
+        <!-- 버튼 태그로도 제출 버튼 만들 수 있음 -->
+        <!-- 클래스 여러개 주고 싶으면 한칸 띄고 쓰면 됨 -->
+        <!-- 버튼 색 바꿀라면 btn-primary 대신에 다른거 쓰면 됨 -->
+        <button type="submit" class="btn btn-primary"> 회원가입 </button>
+    </form>
+</div>
+
+{% endblock %}

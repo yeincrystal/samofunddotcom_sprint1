@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'portfolio',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -77,7 +78,11 @@ WSGI_APPLICATION = 'private_equity.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': 'likelion',
+        'USER': 'samofund-pg',
+        'PASSWORD': 'dldpdls67',
+        'HOST': 'samofund-pg.c3xtddl4mfum.us-east-1.rds.amazonaws.com',
+        'PORT' : '5432',
     }
 }
 
@@ -122,3 +127,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR/"static"
 ]
+
+MEDIA_ROOT = BASE_DIR / 'media'
+
+MEDIA_URL = '/media/'

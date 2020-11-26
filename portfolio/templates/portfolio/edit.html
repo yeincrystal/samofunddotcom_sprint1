@@ -11,11 +11,15 @@
         </box>
         <form action="{% url 'portfolio:update' port.id %}" method="POST">
             {% csrf_token %}
-            <h2>자산운용사</h2>
-            <input class="form-control"  type = "text" name="author" value="{{port.author}}"/>
+           <!-- <h2>자산운용사</h2>
+            <input class="form-control"  type = "text" name="author" value="{{port.author}}"/> -->
             <h2>펀드명</h2>
             <textarea class="form-control" cols="20" rows="2" name="body"> {{port.body}} </textarea>
             <br>
+            <div class="form-group">
+                <label for="image">이미지</label>
+                <input type="file" class="form-control-file" id="image" name="image">
+            </div>
             <input class="btn btn-primary" type = "submit" value="수정하기" />
         </form>
         <a class="btn btn-primary" href="{% url 'portfolio:index' %}">목록</a>
